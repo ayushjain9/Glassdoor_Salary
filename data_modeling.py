@@ -10,11 +10,12 @@ Created on Fri May 28
                         "One hot encoder can also be used"
 # train test split "train validate and test"
 # multiple linear regression
-# lasso regression "WHY??"
+# lasso regression "type of linear regression which helps to reduce overfitting"
 # random forest
 # tune model usiing GridSearchCV
 # test ensembles
 
+Result Random forest gives the best model least error
 
 """
 
@@ -64,19 +65,103 @@ model.fit().summary() # fitting model
 
 # p< 0.05 is relevant column
 # Result : Too much of multi-collinearity so can'tt judge on particular to this model
+# 70 % accuracy
 
 
+# lasso regression
+from sklearn.linear_model import LinearRegression
+lm = LinearRegression()
+lm.fit(X_train, y_train)
+
+# cross validation will run sample and vaildation set. Mini test
+from sklearn.model_selection import cross_val_score
+cross_val_score(lm,X_train,y_train,scoring = 'neg_mean_absolute_error', cv= 2)
+
+# on avg we are off by 20000$
+np.mean(cross_val_score(lm,X_train,y_train, scoring = 'neg_mean_absolute_error', cv= 3))
 
 
+# lasso regression
+
+from sklearn.linear_model import Lasso
+
+lm_l = Lasso()
+np.mean(cross_val_score(lm_l,X_train,y_train, scoring = 'neg_mean_absolute_error', cv= 3))
+lm_l.fit(X_train, y_train)
+# it gave worse then the previous
+
+# Lets check with random forest
+# random forest
+
+from sklearn.ensemble import RandomForestRegressor
+rf = RandomForestRegressor()
 
 
+np.mean(cross_val_score(rf,X_train,y_train,scoring = 'neg_mean_absolute_error', cv= 3))
+# """ giving 15 """ # Tuning needed
+
+rf.fit(X_train, y_train)
 
 
+# tune models GridsearchCV 
+from sklearn.model_selection import GridSearchCV
+parameters = {'n_estimators':range(10,300,10), 'criterion':('mse','mae'), 'max_features':('auto','sqrt','log2')}
+
+gs = GridSearchCV(rf,parameters,scoring='neg_mean_absolute_error',cv=3)
+gs.fit(X_train,y_train)
 
 
+gs.best_score_
+# 14.8
+
+gs.best_estimator_
+# to check the parametres
+# RandomForestRegressor(n_estimators=210)
+
+rf = RandomForestRegressor(n_estimators=210)
+rf.fit(X_train, y_train)
+
+# Boosted regressor
+
+from sklearn.ensemble import GradientBoostingRegressor
+
+clf=GradientBoostingRegressor(n_estimators=80,random_state=400)
+clf.fit(X_train,y_train)
 
 
+clf.score(X_test,y_test)
 
 
+# Test ensembles 
+tpred_lm = lm.predict(X_test)
+tpred_lml = lm_l.predict(X_test)
+tpred_rf = gs.best_estimator_.predict(X_test)
+tpred_br = clf.predict(X_test)
 
 
+from sklearn.metrics import mean_absolute_error
+mean_absolute_error(y_test,tpred_lm)            # error 258384
+
+mean_absolute_error(y_test,tpred_lml)           # 23
+
+mean_absolute_error(y_test,tpred_rf)            # 11
+
+mean_absolute_error(y_test,tpred_br)            # 16
+
+
+# random forest giving the least error
+
+mean_absolute_error(y_test,(tpred_lm+tpred_rf)/2)
+
+import pickle
+pickl = {'model': gs.best_estimator_}
+pickle.dump( pickl, open( 'model_file' + ".p", "wb" ) )
+
+file_name = "model_file.p"
+# with open(file_name, 'rb') as pickled:
+#    data = pickle.load(pickled)
+ #   model = data['model']
+
+# model.predict(np.array(list(X_test.iloc[1,:])).reshape(1,-1))[0]
+
+# list(X_test.iloc[1,:])
