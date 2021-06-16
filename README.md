@@ -8,16 +8,16 @@ Repo for the data science Salary prediction . End to End implementation
 4. Bulit a client facing API using flask.
 
 # Code and Resources Used/ References
-**Python Version: 3.7
-**Packages: pandas, numpy, sklearn, matplotlib, seaborn, selenium, flask, json, pickle
-**For Web Framework Requirements: pip install -r requirements.txt
-**Scraper Github: https://github.com/arapfaik/scraping-glassdoor-selenium
-**Scraper Article: https://towardsdatascience.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905
-**Flask Productionization: https://towardsdatascience.com/productionize-a-machine-learning-model-with-flask-and-heroku-8201260503d2
+**Python Version:** 3.7
+**Packages:** pandas, numpy, sklearn, matplotlib, seaborn, selenium, flask, json, pickle
+**For Web Framework Requirements:** pip install -r requirements.txt
+**Scraper Github:** https://github.com/arapfaik/scraping-glassdoor-selenium
+**Scraper Article:** https://towardsdatascience.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905
+**Flask Productionization:** https://towardsdatascience.com/productionize-a-machine-learning-model-with-flask-and-heroku-8201260503d2
 
 # DataSet
-1000 job postings from glassdoor.com.
-Job title
+*  1000 job postings from glassdoor.com.
+*  Job title
 Salary Estimate
 Job Description
 Rating
