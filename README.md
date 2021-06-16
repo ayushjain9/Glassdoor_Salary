@@ -64,7 +64,7 @@ Distributions of the data and the value counts for the various categorical varia
 # Model Building
 First, I transformed the categorical variables into dummy variables. I also split the data into train and tests sets with a test size of 20%.
 
-I tried three different models and evaluated them using Mean Absolute Error. I chose MAE because it is relatively easy to interpret and outliers aren’t particularly bad in for this type of model.
+I tried Four different models and evaluated them using Mean Absolute Error. I chose MAE because it is relatively easy to interpret and outliers aren’t particularly bad in for this type of model.
 
 I tried three different models:
 
@@ -77,17 +77,19 @@ The Random Forest model far outperformed the other approaches on the test and va
 
 *  Random Forest : MAE = 11.22
 *  Linear Regression: MAE = 18.86
-*  Ridge Regression: MAE = 19.67
+*  Lasso Regression: MAE = 23.67
+*  Gradient Booter : 16.43
+*  OLS - Giving 70% accuracy
 
 # Productionized
 In this step, I built a flask API endpoint that was hosted on a local webserver by following along with the TDS tutorial in the reference section above. The API endpoint takes in a request with a list of values from a job listing and returns an estimated salary.
 
 
 # References:
-## Used Raw CSV from the github given :
+### Used Raw CSV from the github given :
 Scrapping the data from glass door using selenium (Used USA Glasdoor URL Because IN Url was not giving permission to extract data)
 @url: https://github.com/arapfaik/scraping-glassdoor-selenium
 
 
-## OneHotEncoder() vs pandas.get_dummies
+### OneHotEncoder() vs pandas.get_dummies
 @url: https://albertum.medium.com/preprocessing-onehotencoder-vs-pandas-get-dummies-3de1f3d77dcc
