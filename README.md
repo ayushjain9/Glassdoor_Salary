@@ -32,8 +32,6 @@ Repo for the data science Salary prediction . End to End implementation
 *  Revenue
 *  Competitor
 
-### PS: Scrapping didn't worked for Glassdoor India and Glassdoor UK/USA due to Location. So team downloaded the data from Kaggle
-
 # Data Cleaning
 
 *  Parsed numeric data out of salary
@@ -87,7 +85,6 @@ In this step, I built a flask API endpoint that was hosted on a local webserver 
 
 # References:
 ### Used Raw CSV from the github given :
-Scrapping the data from glass door using selenium (Used USA Glasdoor URL Because IN Url was not giving permission to extract data)
 @url: https://github.com/arapfaik/scraping-glassdoor-selenium
 
 
